@@ -1,0 +1,78 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content class="background" padding>
+  <h1 class="page_header_dif">Acknowledge Request</h1>
+
+  <ion-card *ngIf="showMessage">
+    <p style="text-align:center;">No Orders To Acknowledge</p>
+  </ion-card>
+
+  <ion-card class="bkgrnd_trnsprnt" *ngIf="!showMessage">
+    <ion-grid>
+      <ion-row class="title_table row">
+        <ion-col col-3>
+          <strong>Order Numbers</strong>
+        </ion-col>
+        <ion-col col-3>
+          <strong>From where</strong>
+        </ion-col>
+        <ion-col col-3 class="last_child_no">
+          <strong>Return Date</strong>
+        </ion-col>
+        <ion-col col-3>
+          <strong>Address</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let order of orders; let i=index" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+        <ion-row>
+
+          <ion-col col-3 class="first_txt">
+            <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'">
+            </ion-icon>
+            {{order.order_info.order_number}}
+          </ion-col>
+          <ion-col col-3 *ngIf="order.order_info.rto_id == null">
+            From WH
+          </ion-col>
+          <ion-col col-3 *ngIf="order.order_info.rto_id != null">
+            From FE
+          </ion-col>
+          <ion-col col-3 class="last_txt" date='dd-MM-yyyy'>
+            {{order.order_info.return_date}}
+          </ion-col>
+          <ion-col col-3>
+            <button type="button" ion-button (click)="presentAwkAlert(order)">
+              <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
+            </button>
+          </ion-col>
+
+
+        </ion-row>
+        <ion-row *ngIf="isGroupShown(i)" class="kid_table kid_title_table row ">
+          <ion-col col-4>
+            <strong>Tool No.</strong>
+          </ion-col>
+          <ion-col col-4>
+            <strong>Tool Des.</strong>
+          </ion-col>
+          <ion-col col-4>
+            <strong>Asset No.</strong>
+          </ion-col>
+        </ion-row>
+        <div *ngIf="isGroupShown(i)">
+          <ion-row *ngFor="let tool of order['assets']" class="kid_child">
+            <ion-col col-4>{{tool.part_number}}</ion-col>
+            <ion-col col-4>{{tool.part_description}}</ion-col>
+            <ion-col col-4>{{tool.asset_number}}</ion-col>
+          </ion-row>
+          <!--<button ion-button (click)="awkSubmit(order,order['assets'])">Initiate</button>-->
+          <button ion-button (click)="initiate(order)">Initiate</button>
+        </div>
+      </div>
+
+    </ion-grid>
+  </ion-card>
+</ion-content>

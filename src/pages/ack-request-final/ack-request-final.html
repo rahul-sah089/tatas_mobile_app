@@ -1,0 +1,99 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button (click)="selectAll()">{{allSelect}}</button>
+  <button ion-button end *ngIf='selected.length > 0' (click)="continueReturn()">Proceed</button>
+  <ion-row>
+    <ion-col *ngFor="let tool of toolDetails;let i=index" style="text-align:center" col-12>
+      <ion-list>
+        <ion-item>
+          <ion-card class="bkgrnd_trnsprnt">
+            <ion-icon class="tickMark" *ngIf="tool.main_data.isAdded" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
+            <ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <h3>Tool No:</h3>
+                  <p>{{tool.main_data.part_number}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <h3>Description</h3>
+                  <p>{{tool.main_data.part_description}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <h3>Asset No.</h3>
+                  <p>{{tool.main_data.asset_number}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <button ion-button (click)="toggleGroup(i)">Detail</button>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+        <ion-item>
+          <button ion-button color='light' *ngIf="tool.calibrationRequired">Calibration Required</button>
+        </ion-item>
+      </ion-list>
+      <ion-list radio-group [(ngModel)]="tool.main_data.return_status" class="radio_button_st">
+        <ion-list-header>
+          Receive Status
+        </ion-list-header>
+        <ion-item>
+          <ion-label>Recieved</ion-label>
+          <ion-radio value="1" [checked]="true"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>Not Recieved</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+      </ion-list>
+      
+      <div *ngIf="isGroupShown(i)">
+        <ion-row class="kid_title_table">
+          <ion-col col-6>
+            <strong>Tool No.</strong>
+          </ion-col>
+          <ion-col col-6>
+            <strong>Tool Desc.</strong>
+          </ion-col>
+        </ion-row>
+        <ion-row class="kid_child" *ngFor="let subTool of tool['health_data']">
+          <ion-col col-6>{{subTool.part_number}}</ion-col>
+          <ion-col col-6>{{subTool.part_description}}</ion-col>
+          <ion-col col-12>
+            <ion-item>
+              <ion-label>Tool Health</ion-label>
+              <ion-select [(ngModel)]="subTool.health">
+                <ion-option value="1" [selected]="true">Good</ion-option>
+                <ion-option value="2">Defective</ion-option>
+                <ion-option value="3">Missing</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-list>
+              <ion-item>
+                <ion-label>
+                  <strong>Remarks</strong>
+                </ion-label>
+                <ion-input type="text" [(ngModel)]="subTool.remark"></ion-input>
+              </ion-item>
+            </ion-list>
+          </ion-col>
+
+        </ion-row>
+      </div>
+      <ion-list>
+        <ion-item class="button_up">
+          <button ion-button (click)="addElement(tool)">{{tool.main_data.btn}}</button>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-content>

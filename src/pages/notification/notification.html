@@ -1,0 +1,11 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content padding>
+  <ion-list *ngFor="let alertItem of alertList">
+    <ion-item *ngIf='alertItem.alert_count > 0' (click)="clickedEvent(alertItem)">{{alertItem.alert_name}}
+      <ion-badge *ngIf="alertItem.alert_count > 0" id="badge" end>{{alertItem.alert_count}}</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>

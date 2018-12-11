@@ -1,0 +1,71 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content class="background" padding>
+  <h2 class="page_header_dif">My Orders</h2>
+  <ion-card class="bkgrnd_trnsprnt">
+
+    <ion-grid>
+      <ion-row class="title_table">
+        <ion-col col-3>
+          <strong>Order</strong>
+        </ion-col>
+        <ion-col col-3>
+          <strong>Requested Date</strong>
+        </ion-col>
+        <ion-col col-3>
+          <strong>Order Status.</strong>
+        </ion-col>
+        <ion-col col-3>
+          <strong>Address.</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let order of orders; let i=index" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+        <div class="title_table_inside">
+          <ion-row>
+            <ion-col col-3 class="textcolor first_txt">
+              <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>
+              <strong>{{order.order_info.order_number}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <strong>{{order.order_info.request_date}}</strong>
+            </ion-col>
+            <ion-col col-3 class="last_txt">
+              <strong>{{order.order_info.order_status}}</strong>
+            </ion-col>
+            <ion-col col-3>
+              <button type="button" ion-button (click)="presentAlert('Address Informtation',order.address_info)">
+                <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </div>
+        <ion-row *ngIf="isGroupShown(i)" class="kid_table">
+          <ion-col col-3>
+            <strong>Tool No.</strong>
+          </ion-col>
+          <ion-col col-3>
+            <strong>Tool Desc.</strong>
+          </ion-col>
+          <ion-col col-3>
+            <strong>Ordered Qty</strong>
+          </ion-col>
+          <ion-col col-3>
+            <strong>Avail Qty</strong>
+          </ion-col>
+        </ion-row>
+        <div *ngIf="isGroupShown(i)" class="kid_child">
+          <ion-row *ngFor="let tool of order['tools']">
+            <ion-col col-3>{{tool.part_number}}</ion-col>
+            <ion-col col-3>{{tool.part_description}}</ion-col>
+            <ion-col col-3>{{tool.quantity}}</ion-col>
+            <ion-col col-3>{{tool.quantity}}</ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-grid>
+  </ion-card>
+
+</ion-content>

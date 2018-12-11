@@ -1,0 +1,122 @@
+import { NavController } from 'ionic-angular';
+export class Globals {
+  static instance: Globals;
+  static isCreating: Boolean = false;
+
+  private url: string = "http://125.99.157.182/stats_mobile/index.php/";
+  private roles: string[];
+  public fe_id: string[];
+  public logistics_id: string[];
+  public admin_id: string[];
+  private field_engineer;
+  private logistics;
+  private admin;
+
+  private admin_sub_menu;
+  private fe_image_path;
+  private logistic_image_path;
+  private admin_path;
+
+  private admin_headers = [];
+  private notifCount: string;
+
+  public role_id = 'role_id';
+  public sso_id = 'sso_id';
+  public navCtrl: NavController;
+
+  constructor() {
+     if(!Globals.isCreating) {
+      throw new Error('Error in Globals');
+    }
+    this.roles = ['1','2','3','4','5','6'];
+    this.fe_id = ['2','5','6'];
+    this.logistics_id = ['3'];
+    this.admin_id = ['1','4'];
+
+
+    this.fe_image_path ="assets/img/fe.jpg";
+    this.logistic_image_path ="assets/img/lo.jpg";
+    this.admin_path ="assets/img/admin.jpg";
+
+
+
+    this.field_engineer = [{id:"1", img:"assets/img/log-50.svg", title:"Order Tool"}, {id:"2", img:"assets/img/log-52.svg", title:"Acknowledge the Request"}, {id:"3", img:"assets/img/log-51.svg", title:"Return Tools"}, {id:"4", img:"assets/img/log-53.svg", title:"My order"}];
+    this.logistics = [{id:"4", img:"assets/img/log-45.svg", title:"Tools inventory"}, {id:"5", img:"assets/img/log-46.svg", title:"Work List"}];
+    this.admin = [{id:"7", img:"assets/img/log-54.svg", title:"Approvals"}];
+    this.admin_sub_menu = [{id:"admin_1", img:"assets/img/icon-63.svg", title:"Stock Transfer Request"}, {id:"admin_2", img:"assets/img/icon-62.svg", title:"Address Change Request"}, {id:"admin_3", img:"assets/img/icon-61.svg", title:"Extended date Approvals"},  {id:"admin_4", img:"assets/img/icon-60.svg", title:"FE to FE Transfer Request"} ];
+  }
+
+  static getInstance() : Globals {
+    if(Globals.instance == null) {
+      Globals.isCreating = true;
+      Globals.instance = new Globals();
+      Globals.isCreating = false;
+    }
+    return Globals.instance;
+  }
+
+  setNotifCount(count: string) {
+    this.notifCount = count;
+  }
+
+  getNotifCount(): string {
+    return this.notifCount;
+  }
+
+  getUrl(): string {
+    return this.url;
+  }
+
+  getRoleIds(): string[] {
+    return this.roles;
+  }
+
+
+  getAdminSubMenu() {
+    return this.admin_sub_menu;
+  }
+
+  getImagePath(role: string){
+    if(this.fe_id.indexOf(role) > -1) {
+      console.log("feild engineer");
+      return this.fe_image_path;
+    } else if(this.admin_id.indexOf(role) > -1) {
+      console.log("admin");
+      return this.admin_path;
+    } else {
+      console.log("logistics");
+      return this.logistic_image_path;
+    }
+  }
+
+  getRoleByRoleId(role:string){
+    if(this.fe_id.indexOf(role) > -1) {
+      console.log("feild engineer");
+      return "fe";
+    } else if(this.admin_id.indexOf(role) > -1) {
+      console.log("admin");
+      return "admin";
+    } else {
+      console.log("logistics");
+      return "log";
+    }
+  }
+
+  getMenuItems(role: string): string[] {
+    if(this.fe_id.indexOf(role) > -1) {
+      return this.field_engineer;
+
+    } else if(this.admin_id.indexOf(role) > -1) {
+      return this.admin;
+    } else {
+      return this.logistics;
+    }
+  }
+
+
+
+
+
+
+
+}

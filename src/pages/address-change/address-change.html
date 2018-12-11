@@ -1,0 +1,45 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content padding>
+    <h2 class="page_header_dif">Address Change Request</h2>
+    <ion-card *ngIf="!itemExist">
+      <p style="text-align:center;">No Request for Address Change</p>
+    </ion-card>
+  <ion-card *ngIf="itemExist">
+    <ion-row class="title_table row">
+      <ion-col>
+        <strong>Old Address</strong>
+      </ion-col>
+      <ion-col>
+        <strong>Updated Address</strong>
+      </ion-col>
+      <ion-col class="no_border_right">
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let address of addressList">
+      <ion-col class="no_border_right first_txt" >
+        {{address.customer_info.address1}}<br>
+        {{address.customer_info.address2}}<br>
+        {{address.customer_info.address3}}<br>
+        {{address.customer_info.address4}}<br>
+        {{address.customer_info.pin_code}}
+      </ion-col>
+
+      <ion-col class="last_txt" >
+        {{address.order_info.address1}}<br>
+        {{address.order_info.address2}}<br>
+        {{address.order_info.address3}}<br>
+        {{address.order_info.address4}}<br>
+        {{address.order_info.pin_code}}
+      </ion-col>
+      <ion-col class="no_border">
+        <button type="button" ion-button full (click)="onClick(1, address)">Accept</button>
+        <button type="button" ion-button color="light" full (click)="onClick(2, address)">Decline</button>
+      </ion-col>
+    </ion-row>
+    <h6 id="err_msg">{{error_msg}}</h6>
+    <h6 id="suc_msg">{{success_msg}}</h6>
+  </ion-card>
+</ion-content>

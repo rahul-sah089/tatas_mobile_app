@@ -1,0 +1,183 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-list radio-group [(ngModel)]="orderType" (ngModelChange)="reorderType()">
+      <ion-list-header>
+        Order Type
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Request For Tool</ion-label>
+        <ion-radio value="0"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Transfer from FE</ion-label>
+        <ion-radio value="1"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <div *ngIf="orderType == '1'">
+      <strong>FE1 Order Number</strong>
+      <ion-input type="text" [value]="order_id" [(ngModel)]="orderId" (input)="checkOrderId()"></ion-input>
+      <p>
+        <font size="3" color="{{orderIdStatusColor}}">{{orderIdStatus}}</font>
+      </p>
+    </div>
+
+    <ion-item>
+      <ion-label>
+        <strong>Service Type</strong>
+      </ion-label>
+      <ion-select [(ngModel)]="serviceType">
+        <ion-option *ngFor="let servicetype of servicetypelist; let i=index" value={{servicetype.service_type_id}}>{{servicetype.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <div *ngIf="serviceType == 1">
+      <ion-list radio-group [(ngModel)]="readiness">
+        <ion-list-header>
+          Site Readiness
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Yes</ion-label>
+          <ion-radio checked="true" value="1"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>No</ion-label>
+          <ion-radio value="2"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+      <div *ngIf="readiness == '2'">
+        <strong>Site Remarks</strong>
+        <ion-input type="text" [value]="site_remarks" [(ngModel)]="site_remarks"></ion-input>
+      </div>
+    </div>
+
+    <div *ngIf="serviceType == 5">
+      <strong>Other Remarks</strong>
+      <ion-input type="text" [value]="other_remarks" [(ngModel)]="other_remarks"></ion-input>
+    </div>
+
+
+
+    <ion-item>
+      <ion-label>
+        Request Date
+      </ion-label>
+      <ion-datetime disabled displayFormat="MMM DD YYYY" [(ngModel)]="requestedDate"></ion-datetime>
+    </ion-item>
+
+
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label><strong>Need Date</strong></ion-label>
+          <ion-datetime max="2020" displayFormat="MMM DD YYYY" min={{requestedDate}} [(ngModel)]="neededDate"></ion-datetime>
+          <ion-icon name="calendar" item-right></ion-icon>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+            <ion-label><strong>Return Date</strong></ion-label>
+          <ion-datetime max="2020"  displayFormat="MMM DD YYYY" min={{neededDate}} [(ngModel)]="returnedDate"></ion-datetime>
+          <ion-icon name="calendar" item-right></ion-icon>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-item>
+      <ion-label>
+        <strong>Siebel SR Number</strong>
+      </ion-label>
+      <ion-input type="text" [value]="sebealSrNum" [(ngModel)]="sebealSrNum"></ion-input>
+    </ion-item>
+
+
+
+
+
+    <ion-item>
+      <ion-label>
+        <strong>Delivery Point</strong>
+      </ion-label>
+      <ion-select [(ngModel)]="deliveryPoint" (ngModelChange)="resetAddress()">
+        <ion-option value="1">Customer</ion-option>
+        <ion-option value="2">Warehouse</ion-option>
+        <ion-option value="3">Others</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="deliveryPoint == '1'">
+      <ion-label>System ID</ion-label>
+      <ion-input type="text" [value]="systemId" [(ngModel)]="systemId" (input)="getCustDet()"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="deliveryPoint == '2'">
+        <ion-label>Warehouse</ion-label>
+        <p>{{warehouseDet.wh_code}}-({{warehouseDet.name}})</p>
+      </ion-item>
+   
+
+    <div *ngIf="addressChange == 0">
+      <ion-item *ngIf="deliveryPoint == '1'">
+        <ion-label>Site ID</ion-label>
+        <ion-input type="text" [value]="siteId" [(ngModel)]="siteId"></ion-input>
+      </ion-item>
+      
+
+      <strong>Address</strong>
+      <p>{{address1}}</p>
+      <p>{{address2}}</p>
+      <p>{{city}}</p>
+      <p>{{state}}</p>
+      <p>{{pincode}}</p>
+
+
+      <button  *ngIf="deliveryPoint == '1'" ion-button clear (click)="openChangeAddress()">
+        <ion-icon name="briefcase"></ion-icon>
+        Change Address
+      </button>
+    </div>
+
+    <div *ngIf="addressChange == 1">
+      <strong>Address Line 1</strong>
+      <ion-input type="text" [value]="address1" [(ngModel)]="address1"></ion-input>
+
+      <strong>Address Line 2</strong>
+      <ion-input type="text" [value]="address2" [(ngModel)]="address2"></ion-input>
+
+      <strong>City</strong>
+      <ion-input type="text" [value]="city" [(ngModel)]="city"></ion-input>
+
+      <strong>State</strong>
+      <ion-input type="text" [value]="state" [(ngModel)]="state"></ion-input>
+
+      <strong>Pincode</strong>
+      <ion-input type="text" [value]="pincode" [(ngModel)]="pincode"></ion-input>
+
+      <!--<button  ion-button clear (click)="refreshChangeAddress()">
+          <ion-icon name="briefcase"></ion-icon>
+          Current Address
+        </button>-->
+
+    </div>
+
+    <h6 id="err_msg">{{error_msg}}</h6>
+    <h6 id="suc_msg">{{success_msg}}</h6>
+
+    <button type="submit" ion-button (click)="onOrderTools()">
+      Submit
+    </button>
+
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-content class="background  ion_log">
+
+
+
+  <ion-card>
+
+
+    <ion-card-content class="header_log">
+
+      <div class="login_log">
+
+        <ion-img class="logo_log" src="assets/img/stats_logo.svg"></ion-img>
+        <h3>Sign in to continue</h3>
+
+
+        <form id='login' (ngSubmit)="signIn(f.value)" #f="ngForm">
+          <ion-list>
+            <ion-item>
+              <ion-icon name="person" item-left></ion-icon>
+              <ion-label floating>Username</ion-label>
+              <ion-input class="input_log" type="text" name="uname" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="lock" item-left></ion-icon>
+              <ion-label floating>Password</ion-label>
+              <ion-input type="{{pswdText}}" name="pswd" ngModel required></ion-input>
+              <button type="button" ion-button icon-only item-end clear (click)="onIconClick()">
+                <ion-icon name="eye"></ion-icon>
+              </button>
+            </ion-item>
+          </ion-list>
+          <div>
+            <div class="space1x"></div>
+            <button ion-button full>Login</button>
+          </div>
+        </form>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

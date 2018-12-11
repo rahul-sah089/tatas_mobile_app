@@ -1,0 +1,18 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content padding>
+  <ion-card class="bkgrnd_trnsprnt">
+    <ion-card-content>
+      <ion-row >
+        <ion-col *ngFor="let subMenu of subMenuList" (click)="itemClick(subMenu)" col-6>
+          <ion-item class="bkgrnd_trnsprnt image_icon" >
+            <ion-avatar><img src={{subMenu.img}}></ion-avatar>
+            {{subMenu.title}}
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,116 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+
+<ion-content padding>
+  <h2 class="page_header_dif">Warehouse to Warehouse Trasfer </h2>
+<ion-card>
+
+
+
+  <ion-row  class="ware">
+    <ion-col col-6 class="no_border">
+      <ion-list>
+        <ion-item>
+            <ion-card-content>
+              <ion-row>
+                <ion-col  class="no_border col_text">
+                  <h3>Stn No:</h3>
+                  <p>{{stnNo}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col class="no_border-top">
+                  <h3>From Wharehouse</h3>
+                  <p>{{stockInformations.from_wh}}</p>
+                </ion-col>
+              </ion-row>
+
+            </ion-card-content>
+        </ion-item>
+      </ion-list>
+
+    </ion-col>
+    <ion-col col-6 class="no_border"> 
+      <ion-list>
+        <ion-item>
+            <ion-card-content>
+              <ion-row>
+                <ion-col class="no_border col_text">
+                  <h3>SSO Id:</h3>
+                  <p>{{ssoId}}</p>
+                </ion-col>
+              </ion-row> 
+              <ion-row>
+                <ion-col class="no_border-top">
+                  <h3>To Warehouse</h3>
+                  <p>{{stockInformations.to_wh}}</p>
+                </ion-col>
+              </ion-row>
+
+            </ion-card-content>
+        </ion-item>
+      </ion-list>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="title_table" >
+    <ion-col col-3>
+      <strong>Tool No</strong>
+    </ion-col>
+    <ion-col  col-3>
+      <strong>Tool Desc</strong>
+    </ion-col>
+    <ion-col  col-3>
+      <strong>Asset</strong>
+    </ion-col>
+    <ion-col  col-3 class="no_border_right">
+      <strong>Status</strong>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row class="padding_top_d" *ngFor="let asset of assets; let i=index" class="row">
+    <ion-col  col-3 class="no_border_right first_txt">
+      {{asset.part_number}}
+    </ion-col>
+    <ion-col  col-3 class="no_border_right">
+      {{asset.part_description}}
+    </ion-col>
+    <ion-col  col-3 class="no_border_right">
+      {{asset.asset_number}}
+    </ion-col>
+    <ion-col  col-3 class="last_txt">
+      {{asset.status_name}}
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+
+    <ion-col col-12 class="no_border">
+        <ion-item>
+            <ion-label color="primary">Comment</ion-label>
+            <ion-input placeholder="Please enter your comment here"  [(ngModel)]="comment"></ion-input>
+          </ion-item>
+
+   
+  </ion-col>
+  
+  <ion-col col-12 class="no_border">
+    <button ion-button icon-start (click)="accept()">
+      <ion-icon ios="ios-checkmark-circle-outline" md="md-checkmark-circle-outline"></ion-icon>
+      Approve
+    </button>
+    <button ion-button (click)="decline()">
+      <ion-icon ios="ios-close" md="md-close"></ion-icon>
+      &nbsp; Decline
+    </button>
+  </ion-col>
+
+
+  </ion-row>
+
+</ion-card>
+</ion-content>

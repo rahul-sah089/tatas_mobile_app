@@ -1,0 +1,31 @@
+page-admin-approval {
+
+
+    .item-md ion-avatar ion-img, .item-md ion-avatar img {
+        border-radius: 0 !important;
+        overflow: visible !important;
+        width: 77px !important;
+        height: 44px !important;
+        margin: auto;
+        vertical-align: middle;
+    }
+        
+    
+
+
+
+    ion-label {
+        margin: 0;
+        display: block;
+       overflow: visible; 
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        font-size: 13px;
+        text-overflow: ellipsis;
+        white-space: normal!important;
+        text-align: center;
+    }
+
+}

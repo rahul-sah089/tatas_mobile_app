@@ -1,0 +1,71 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-grid>
+      <ion-row class="title_table row">
+        <ion-col col-4>
+          <strong>Tool Number</strong>
+        </ion-col>
+        <ion-col col-4>
+          <strong>Tool Description</strong>
+        </ion-col>
+        <ion-col col-4 class="no_border_right">
+          <strong>Req Qty.</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let tool of stockOrderDet; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}">
+        <div class="title_table_inside">
+          <ion-row>
+            <ion-col col-4 class="textcolor first_txt no_border_right" (click)="toggleGroup(i)">
+              <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'">
+              </ion-icon>
+              {{tool.part_number}}
+            </ion-col>
+            <ion-col col-4 class="no_border_right">
+              {{tool.part_description}}
+            </ion-col>
+            <ion-col col-4 class="last_child">
+              {{tool.quantity - tool.available_quantity}}
+            </ion-col>
+          </ion-row>
+        </div>
+        <ion-row *ngIf="isGroupShown(i)" class="kid_table kid_title_table">
+
+          <ion-col col-3 *ngIf="tool['wh_data'].length">
+            <strong>Warehouse</strong>
+          </ion-col>
+          <ion-col col-3 *ngIf="tool['wh_data'].length">
+            <strong>Avail Qty.</strong>
+          </ion-col>
+          <ion-col col-3 *ngIf="tool['wh_data'].length">
+            <strong>Qty.</strong>
+          </ion-col>
+          <ion-col col-3 class="no_border_right" *ngIf="tool['wh_data'].length">
+          </ion-col>
+
+
+          <ion-col *ngIf="!tool['wh_data'].length" col-12>No item avaiable in warehouse</ion-col>
+
+        </ion-row>
+        <div *ngIf="isGroupShown(i)">
+          <ion-row *ngFor="let warehouse of tool['wh_data']" class="kid_child">
+            <ion-col col-3 class="no_border_right">{{warehouse.wh_name}}</ion-col>
+            <ion-col col-3 class="no_border_right">{{warehouse.wh_qty}}</ion-col>
+            <ion-col col-3 class="no_border_right">
+              <ion-input type="number" [(ngModel)]="warehouse.qty"></ion-input>
+            </ion-col>
+            <ion-col col-3>
+                <ion-icon name="add-circle" (click)='updtQty(tool, warehouse, true)'></ion-icon>
+                <ion-icon name="remove-circle" (click)='updtQty(tool, warehouse, false)'></ion-icon>
+            </ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-grid>
+    <button *ngIf="sumbitButtonShown" type="button" ion-button full (click)="onClick()">Submit</button>
+  </ion-card>
+</ion-content>

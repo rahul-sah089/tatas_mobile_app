@@ -1,0 +1,146 @@
+page-extend-date {
+    .background{
+        //background-image: url('../assets/img/login_bkgrnd.png');
+    }
+
+
+
+    $black:black;
+
+
+
+    ion-img {
+      left: 0;
+      right: 0;
+      margin:0 auto;
+      width: 50%;
+      height: 15%;
+      background: rgba(0, 0, 0, 0);
+    }
+
+    ion-avatar {
+      width: 50%;
+      height: 100%;
+    }
+
+    .bkgrnd_trnsprnt {
+      background: rgba(0, 0, 0, 0);
+    }
+
+    ion-col {
+      width: 100%;
+    }
+
+    .header .col {
+      background-color:lightgrey;
+  }
+
+  .col {
+      border: solid 1px grey;
+      color:grey;
+
+  }
+
+  .col:last-child {
+      border-right: solid 1px grey;
+
+  }
+
+
+
+  .row:last-child .col {
+      border-bottom: solid 1px grey;
+  }
+
+  .textcolor{
+    color:#0093F2;
+  }
+
+
+  .title_table > ion-col  {
+  text-align: center;
+  border: none;
+
+  color: $black;
+  font-family: 'Roboto', sans-serif;
+
+
+  font-size:13px;
+  vertical-align: middle;
+
+
+  }
+  .page_header_dif{
+
+
+  padding: 20px;
+
+  text-align: center;
+  font-size: 18px;
+  }
+
+  .first_txt{
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+
+  }
+  .last_txt{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  }
+
+
+  .title_table_inside > ion-col  {
+
+  border-color: #B2B2B2;
+  padding: 10px;
+  font-weight:200!important;
+  color: $black;
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
+  white-space: pre-wrap;
+  font-size:13px;
+
+  display:table-cell;
+  text-align:center;
+  width:100%;
+  vertical-align: middle;
+  }
+
+  .title_table_inside > ion-row {
+    box-shadow: 2px 5px 21px #e9e5e5;
+  margin-top: 20px;
+
+    }
+
+    .title_table_inside > ion-row > ion-col {
+  text-align: center;
+  border-top:1px solid #B2B2B2;
+
+
+      }
+
+
+
+
+
+      .kid_table > ion-col {
+
+    border: 0px solid #ffffff;
+    margin-top: 20px;
+
+        }
+
+
+
+
+      .kid_child > ion-col {
+
+  color:white;
+  border-right: 1px solid white;
+  background-color: #B2B2B2;
+
+
+        }
+}

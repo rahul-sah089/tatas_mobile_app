@@ -1,0 +1,74 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content class="background" padding>
+  <h2 class="page_header_dif">FE to FE Transfer</h2>
+  <ion-card  *ngIf= "!isItemPresent" class="bkgrnd_trnsprnt">
+    <p style="text-align:center;">There is no item for transfer</p>
+  </ion-card>
+  <ion-card *ngIf="isItemPresent" class="bkgrnd_trnsprnt">
+    <ion-grid>
+      <ion-row class="title_table">
+        <ion-col col-3 class="no_border">
+          <strong>FE1 Order</strong>
+        </ion-col>
+        <ion-col col-3 class="no_border">
+          <strong>FE2 Order</strong>
+        </ion-col>
+        <ion-col col-3 class="no_border">
+        </ion-col>
+        <ion-col col-3 class="no_border">
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let feToFe of feToFeDetails; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}">
+        <div class="title_table_inside">
+          <ion-row>
+            <ion-col col-3 class="textcolor first_txt no_border_right" (click)="toggleGroup(i)">
+              <ion-icon color="success" 
+              item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'">
+              </ion-icon>
+              {{feToFe.fe1_sso}}
+              -
+              {{feToFe.fe1_order_number}}
+            </ion-col>
+
+            <ion-col col-3 class="textcolor last_txt" (click)="toggleGroup(i)">
+                <ion-icon color="success" 
+                item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'">
+                </ion-icon>
+                {{feToFe.fe2_sso}}
+                -
+                {{feToFe.fe2_order_number}}
+              </ion-col>
+            <ion-col col-3 class="no_border">
+              <button type="button" ion-button full (click)="onClick(1, feToFe)">Accept</button>
+            </ion-col>
+            <ion-col col-3 class="no_border">
+              <button type="button" ion-button color="light" full (click)="onClick(2, feToFe)">Decline</button>
+            </ion-col>
+          </ion-row>
+        </div>
+        <ion-row *ngIf="isGroupShown(i)" class="kid_table">
+          <ion-col col-4>
+            <strong>Tool Number</strong>
+          </ion-col>
+          <ion-col col-4>
+            <strong>Tool Description</strong>
+          </ion-col>
+          <ion-col col-4>
+            <strong>Asset No</strong>
+          </ion-col>
+        </ion-row>
+        <div *ngIf="isGroupShown(i)" class="kid_child">
+          <ion-row class="kid_child" *ngFor="let feTool of feToFe['assets']">
+            <ion-col col-4>{{feTool.part_number}}</ion-col>
+            <ion-col col-4>{{feTool.part_description}}</ion-col>
+            <ion-col col-4>{{feTool.asset_number}}</ion-col>
+          </ion-row>
+        </div>
+      </div>
+    </ion-grid>
+  </ion-card>
+</ion-content>

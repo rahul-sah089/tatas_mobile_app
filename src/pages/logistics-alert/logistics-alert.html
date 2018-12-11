@@ -1,0 +1,65 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content class="background" padding>
+  <h2 class="page_header_dif">{{alertName}}</h2>
+  <ion-card class="bkgrnd_trnsprnt">
+
+    <ion-grid>
+      <ion-row class="title_table">
+        <ion-col  *ngFor="let tableHeader of tableHeaderList; let i=index">
+          <strong *ngIf="alertType == 1 && tableHeader.header1 != null">{{tableHeader.header1}}</strong>
+          <strong *ngIf="alertType == 2 && tableHeader.header2 != null">{{tableHeader.header2}}</strong>
+          <strong *ngIf="alertType == 3 && tableHeader.header3 != null">{{tableHeader.header3}}</strong>
+          <strong *ngIf="alertType == 4 && tableHeader.header4 != null">{{tableHeader.header4}}</strong>
+          <strong *ngIf="alertType == 5 && tableHeader.header5 != null">{{tableHeader.header5}}</strong>
+          <strong *ngIf="alertType == 6 && tableHeader.header6 != null">{{tableHeader.header6}}</strong>
+          <strong *ngIf="alertType == 7 && tableHeader.header7 != null">{{tableHeader.header7}}</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let alert of alertResult; let i=index" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+        <div class="title_table_inside">
+          <ion-row>
+            <ion-col class="textcolor first_txt no_border_right">
+              <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'">
+              </ion-icon>{{alert.header1}}</ion-col>
+            <ion-col class="no_border_right">
+              <ion-icon *ngIf="alert.header2 != null" name="pin"></ion-icon>{{alert.header2}}
+            </ion-col>
+            <ion-col *ngIf="alert.header3 != null" class="no_border_right">{{alert.header3}}</ion-col>
+            <ion-col *ngIf="alert.header4 != null" class="no_border_right">{{alert.header4}}</ion-col>
+            <ion-col *ngIf="alert.header5 != null" class="last_txt">{{alert.header5}}</ion-col>
+          </ion-row>
+        </div>
+
+        <ion-row *ngIf="isGroupShown(i)" class="kid_table">
+          <ion-col col-4  *ngFor="let tableSubHeader of tableSubHeaderList">
+            <strong *ngIf="alertType == 1">{{tableSubHeader.subheader1}}</strong>
+            <strong *ngIf="alertType == 2">{{tableSubHeader.subheader1}}</strong>
+            <strong *ngIf="alertType == 3">{{tableSubHeader.subheader3}}</strong>
+            <strong *ngIf="alertType == 4">{{tableSubHeader.subheader1}}</strong>
+            <strong *ngIf="alertType == 5">{{tableSubHeader.subheader1}}</strong>
+            <strong *ngIf="alertType == 6">{{tableSubHeader.subheader1}}</strong>
+            <strong *ngIf="alertType == 7">{{tableSubHeader.subheader1}}</strong>
+          </ion-col>
+        </ion-row>
+        <div *ngFor="let toolDetail of alert.toolsDetails">
+          <div>
+            <ion-row  *ngIf="isGroupShown(i)" class="kid_child">
+              <ion-col *ngIf="toolDetail.subheader1 != null" col-4>{{toolDetail.subheader1}}</ion-col>
+              <ion-col *ngIf="toolDetail.subheader2 != null" col-4>{{toolDetail.subheader2}}</ion-col>
+              <ion-col *ngIf="toolDetail.subheader3 != null" col-4>{{toolDetail.subheader3}}</ion-col>
+              <ion-col *ngIf="toolDetail.subheader4 != null" col-4>{{toolDetail.subheader4}}</ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <h6 align="center" id="err_msg">{{error_msg}}</h6>
+    </ion-grid>
+  </ion-card>
+</ion-content>

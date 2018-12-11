@@ -1,0 +1,89 @@
+<ion-header>
+  <page-header class="header_co"></page-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-10>
+        <ion-searchbar placeholder=" Search Product by  Tool Number / Modality / Tool Description" [(ngModel)]="myInput" [showCancelButton]="shouldShowCancel"
+          (ionInput)="searchTools()" (ionCancel)="onCancel($event)"> </ion-searchbar>
+      </ion-col>
+      <ion-col col-2 *ngIf="itemss.length > 0">
+        <button ion-button icon-only clear end (click)="navigateToShopping()">
+          <ion-icon ios="ios-cart" md="md-cart">
+            <ion-badge d="badge">{{totalProduct}}</ion-badge>
+          </ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col *ngFor="let tool of tools;let i=index" style="text-align:center" col-6>
+      <ion-list>
+        <ion-item>
+          <ion-card class="bkgrnd_trnsprnt">
+            <ion-icon class="tickMark" *ngIf="tool.isAdded" ios="ios-checkmark-circle" md="md-checkmark-circle"></ion-icon>
+            <ion-card-content>
+              <ion-row>
+                <ion-col>
+                  <h3><strong>Tool No:</strong></h3>
+                  <p>{{tool.tool_number}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <h3><strong>Description</strong></h3>
+                  <p>{{tool.tool_desc}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <h3><strong>Modality</strong></h3>
+                  <p>{{tool.modality}}</p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col>
+                  <h3><strong>Avail Qty</strong></h3>
+                  <p>{{tool.qty}}</p>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+        <ion-item class="input_fe">
+          <ion-label>Quantity</ion-label>
+          <ion-input type="number" [(ngModel)]="tool.tool_quant"></ion-input>
+          <!--<ion-select [(ngModel)]="tool.tool_quant" (ngModelChange)="qtyChange(tool)">
+            <ion-option *ngFor="let item of createRange(tool.qty);">{{item}}</ion-option>
+          </ion-select>-->
+        </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col>
+             <ion-row >
+                <button class="button_hear" ion-button icon-start (click)="addSingleElement(tool)">
+                    <ion-icon ios="ios-add-circle" md="md-add-circle"></ion-icon>
+                    Add
+                  </button>
+             </ion-row>
+             <ion-row>
+                <button class="button_hear" ion-button icon-end (click)="removeSingleElement(tool)">
+                    Remove
+                    <ion-icon ios="ios-remove-circle" md="md-remove-circle"></ion-icon>
+                  </button>
+             </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+
+      </ion-list>
+    </ion-col>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-row>
+  <h6 align="center" id="err_msg">{{error_msg}}</h6>
+</ion-content>

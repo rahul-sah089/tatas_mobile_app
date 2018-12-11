@@ -1,0 +1,56 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+
+
+<ion-content class="background" padding style="text-align:center">
+ <ion-list class="checkout_img">
+    <ion-img width="80" height="80" src="assets/img/cart.svg"></ion-img>
+  </ion-list>
+  <ion-card class="bkgrnd_trnsprnt">
+    <ion-grid>
+      <ion-row class="no_border  title_table  Row">
+        <ion-col col-4>
+          <strong>Tool No.</strong>
+        </ion-col>
+        <ion-col col-4>
+          <strong>Description</strong>
+        </ion-col>
+        <ion-col col-4 class="no_border_right">
+          <strong>Quantity</strong>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let item of items; let i=index" (click)="pressEvent(item)">
+        <ion-col col-4 class="no_border_right first_txt">
+          <ion-icon ios="ios-checkmark" md="md-checkmark" *ngIf="item.isSelected"></ion-icon>
+          <strong>{{item.tool_number}}</strong>
+        </ion-col>
+        <ion-col col-4 class="no_border_right ">
+          <strong>{{item.tool_desc}}</strong>
+        </ion-col>
+        <ion-col col-4 class="last_txt">
+          <strong>{{item.tool_quant}}</strong>
+        </ion-col>
+      </ion-row>
+
+  <button ion-button block (click)="confirmOrder()" [disabled]="!enableCheckout">CheckOut</button>
+    </ion-grid>
+  </ion-card>
+
+  <!-- <button ion-button icon-start (click)="addItem()">
+    <ion-icon name="ios-add-circle-outline"></ion-icon>
+  </button> -->
+
+  <button ion-button icon-end (click)="removeItems()" [disabled]="!enableRemove">
+    <ion-icon name="ios-remove-circle-outline"></ion-icon>
+  </button>
+
+
+
+
+
+
+
+</ion-content>

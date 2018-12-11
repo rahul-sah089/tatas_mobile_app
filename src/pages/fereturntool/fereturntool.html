@@ -1,0 +1,83 @@
+<ion-header>
+  <page-header class="header_co"></page-header>
+</ion-header>
+
+<ion-content padding>
+  <h1 class="page_header_dif">FE Return Tool Request</h1>
+
+  <ion-card *ngIf="showMessage">
+      <p style="text-align:center;">No Items to Return</p>
+  </ion-card>
+  <ion-card class="bkgrnd_trnsprnt" *ngIf="!showMessage">
+    <ion-grid>
+      <ion-row class="title_table row">
+        <ion-col col-2>
+          <strong>Order No.</strong>
+        </ion-col>
+        <ion-col col-2>
+          <strong>Request Date</strong>
+        </ion-col>
+        <ion-col col-2>
+          <strong>Return Date</strong>
+        </ion-col>
+        <ion-col col-2>
+          <strong>Status</strong>
+        </ion-col>
+        <ion-col col-4 class="last_child_no">
+          <strong>Action</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let tool of returnTools; let i=index" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+        <div class="title_table_inside">
+          <ion-row class="table_border row">
+            <ion-col col-2 class="textcolor first_txt no_border_right">
+              <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>{{tool.order_info.order_number}}
+            </ion-col>
+            <ion-col col-2 class="no_border_right">
+              <p>{{tool.order_info.request_date}}</p>
+            </ion-col>
+            <ion-col col-2 class="no_border_right">
+              <p>{{tool.order_info.return_date}}</p>
+            </ion-col>
+            <ion-col col-2 class="last_txt">
+              <p>{{tool.order_info.current_stage_name}}</p>
+            </ion-col>
+            <ion-col *ngIf="tool.order_info.action_flg == 1" col-4 class="no_border">
+              <button ion-button  (click)="extendDate(tool)">Extend Date </button>
+              <button ion-button  (click)="navigateTo(tool)"> Initiate </button>
+            </ion-col>
+
+            <ion-col *ngIf="tool.order_info.action_flg == 2" col-12 class="no_border">
+              <p>{{tool.order_info.action_data}}</p>
+            </ion-col>
+
+
+          </ion-row>
+        </div>
+
+        <ion-row *ngIf="isGroupShown(i)" class="kid_title_table">
+          <ion-col col-4>
+            <strong>Tool No.</strong>
+          </ion-col>
+          <ion-col col-4>
+            <strong>Tool Desc.</strong>
+          </ion-col>
+          <ion-col col-4 class="no_border_right">
+            <strong>Asset No.</strong>
+          </ion-col>
+        </ion-row>
+
+        <div *ngFor="let toolDetail of tool.assets">
+          <div>
+            <ion-row *ngIf="isGroupShown(i)" class="kid_child">
+              <ion-col col-4>{{toolDetail.part_number}}</ion-col>
+              <ion-col col-4>{{toolDetail.part_description}}</ion-col>
+              <ion-col col-4>{{toolDetail.asset_number}}</ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+    </ion-grid>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,120 @@
+page-home {
+  .background{
+ 
+      background-image: url('../assets/img/login_bkgrnd.png');
+      margin:auto;
+      background-size:cover;
+      background-repeat: no-repeat;
+
+  }
+
+  .scroll-content {
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+
+
+
+
+  ion-img {
+    left: 0;
+    right: 0;
+    margin:0 auto;
+    width: 50%;
+    height:20%;
+
+
+    
+  }
+
+  .list > .item-block:first-child {
+    border-radius: 5px;
+  }
+
+  .list > .item-block .item-inner {
+    border-radius: 5px;
+  }
+
+  ion-card.card {
+    box-shadow: none;
+    background: rgba(0, 0, 0, 0);
+    border-radius: 5px;
+  }
+
+  .item {
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0);
+    border: medium none;
+  
+  }
+  .card-content-md {
+    padding:50px 20px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+}
+
+.header_log h3{
+
+  margin: 2px 0;
+  font-size: 1.7rem;
+  font-weight: 600px;
+  color: #222;
+}
+scroll-content{
+
+  padding-bottom: 0px!important;
+padding:0px!important;
+
+}
+
+
+
+
+/* my code */
+
+ .logo_log{
+  margin: auto;
+  text-align: center;
+  display: block;
+  padding-top: 33px;
+  height: 131px;
+  width: 60%;
+  text-align: center;
+
+  
+}
+ .header_log h2{
+  font-size: 2em;
+  font-weight: 800;
+  text-align: left;
+  padding-top: 110px;
+  
+}
+ .header_log h5{
+text-align:left;
+font-size: 1.1em;
+   
+  }
+
+
+ .space1x{
+padding-top:15px;
+padding-bottom:15px;
+
+}
+
+ion-img {
+background-color: rgba(255, 255, 255, 0)!important;
+}
+
+ .scroll-content {
+display:block!important;
+
+}
+
+
+
+}

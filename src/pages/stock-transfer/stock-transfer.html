@@ -1,0 +1,54 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content class="background" padding>
+  <h2 class="page_header_dif">Stock Transfer Request</h2>
+  <ion-card *ngIf="stockTransferList.length == 0">
+    <p style="text-align:center;">No Request for Stock Transfer</p>
+  </ion-card>
+  <ion-card *ngIf="stockTransferList.length != 0"  class="bkgrnd_trnsprnt">
+    <ion-grid>
+      <ion-row class="title_table no-row">
+        <ion-col>
+          <strong>Order / Stock Transfer No</strong>
+        </ion-col>
+        <ion-col>
+          <strong>From Where</strong>
+        </ion-col>
+        <ion-col class="no_border_right">
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let stockTransfer of stockTransferList " class=" row">
+        <ion-col *ngIf="stockTransfer.order_type == 1"  class="first_txt no_border_right text">
+          {{stockTransfer.stn_number}}
+        </ion-col>
+        <ion-col *ngIf="stockTransfer.order_type == 2"  class=" first_txt no_border_right text ">
+          {{stockTransfer.order_number}}
+        </ion-col>
+        <ion-col *ngIf="stockTransfer.order_type == 1" class="last_txt text">
+          For WH
+        </ion-col>
+        <ion-col *ngIf="stockTransfer.order_type == 2" class="last_txt text">
+          For Order
+        </ion-col>
+
+        <ion-col *ngIf="stockTransfer.order_type == 1" class="no_border">
+          <button type="button" ion-button (click)="presentAlert(stockTransfer)">
+            <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
+          </button>
+        </ion-col>
+
+        <ion-col *ngIf="stockTransfer.order_type == 2" class="no_border">
+          <!--<button ion-button icon-start (click)="refreshOrder(stockTransfer)">
+            <ion-icon ios="ios-refresh-circle" md="md-refresh-circle"></ion-icon>
+          </button>-->
+          <button ion-button (click)="orderDetails(stockTransfer)">
+            <ion-icon ios="ios-information-circle" md="md-information-circle"></ion-icon>
+          </button>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

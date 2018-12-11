@@ -1,0 +1,100 @@
+page-ack-request-final {
+    .page_header_dif{
+        padding: 20px;
+
+        text-align: center;
+        font-size: 18px;
+        }
+        
+.row{
+padding-top: 7px;
+
+
+}
+
+ 
+        .title_table > ion-col  {
+            text-align: center;
+            border: none; 
+            color: black;
+            font-family: 'Roboto', sans-serif;
+            font-size:13px;
+            vertical-align: middle;
+            
+            }
+.table_border > ion-col{
+
+border:1px solid #B2B2B2;
+}
+
+.first_txt{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
+    }
+    .last_txt{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+    }
+
+    .kid_table > ion-col {
+        
+        border: 0px solid #ffffff;
+        margin-top: 2px;
+        
+        
+        }
+
+
+        .kid_title_table > ion-col  {
+            text-align: center;
+            border: none;
+            color:#7F7F7F;
+            font-family: 'Roboto', sans-serif;
+            font-size:14px;
+            vertical-align: middle;
+            
+            
+            }
+          
+ 
+            .kid_child > ion-col {
+                
+           
+                border-right: 1px solid white;
+                background-color: #B2B2B2;
+
+                  }
+
+
+                  .kid_child > ion-col > p{
+                    
+                    color: white;
+                    
+                    
+                          
+                      }
+
+                  .textcolor{
+                    color:#120dda!important;
+                  }
+                
+
+
+.no_border{
+
+border: 0px solid #ffffff!important;
+
+}
+
+
+
+.no_border_right{
+    
+    border-right: 0px solid #ffffff!important;
+    
+    }
+    
+    
+}

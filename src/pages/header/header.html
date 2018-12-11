@@ -1,0 +1,16 @@
+<ion-navbar>
+  <ion-title>
+    <img class="header-img" alt="logo" height="40" src="assets/img/logo.svg" (click)="redirectHome()">
+  </ion-title>
+  <ion-buttons end>
+    <button ion-button icon-only clear end (click)="showNotif()">
+      <ion-icon id="badge-icon" name="notifications">
+        <ion-badge *ngIf="globals.getNotifCount() != 0" id="badge">{{this.globals.getNotifCount()}}</ion-badge>
+      </ion-icon>
+    </button>
+
+    <button ion-button icon-only clear end (click)="logOut()">
+      <ion-icon id="badge-icon" name="power"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>

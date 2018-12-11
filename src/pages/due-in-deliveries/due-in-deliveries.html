@@ -1,0 +1,57 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content class="background" padding>
+  <h2 class="page_header_dif">Due In Deliveries</h2>
+  <ion-card class="bkgrnd_trnsprnt">
+
+    <ion-grid>
+      <ion-row class="title_table">
+        <ion-col>
+          <strong>Order No</strong>
+        </ion-col>
+        <ion-col>
+          <strong>FE SSO</strong>
+        </ion-col>
+        <ion-col>
+          <strong>Expected Delivery Date</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let order of orders; let i=index" text-wrap (click)="toggleGroup(i)" [ngClass]="{active: isGroupShown(i)}">
+        <div class="title_table_inside">
+          <ion-row>
+            <ion-col class="textcolor first_txt">
+              <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>{{order.order_number}}</ion-col>
+            <ion-col>
+              {{order.sso_id}}
+            </ion-col>
+            <ion-col>
+              {{order.exp_d_date}}
+            </ion-col>
+          </ion-row>
+        </div>
+        <ion-row *ngIf="isGroupShown(i)" class="kid_table">
+          <ion-col>
+            <strong>Tool No.</strong>
+          </ion-col>
+          <ion-col>
+            <strong>Tool Desc.</strong>
+          </ion-col>
+          <ion-col>
+            <strong>Asset No</strong>
+          </ion-col>
+        </ion-row>
+        <div *ngIf="isGroupShown(i)" class="kid_child">
+        <ion-row *ngFor="let tool of order['expected_delivery_date']">
+          <ion-col>{{tool.part_number}}</ion-col>
+          <ion-col>{{tool.part_description}}</ion-col>
+          <ion-col>{{tool.asset_number}}</ion-col>
+        </ion-row>
+      </div>
+      </div>
+    </ion-grid>
+  </ion-card>
+
+</ion-content>

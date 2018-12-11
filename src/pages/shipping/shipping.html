@@ -1,0 +1,61 @@
+<ion-header>
+    <page-header class="header_co"></page-header>
+  </ion-header>
+  
+  <ion-content class="background" padding>
+      <h2 class="page_header_dif">Shipping Request</h2>
+    <ion-card class="bkgrnd_trnsprnt">
+     
+      <ion-grid>
+        <ion-row class="title_table">
+          <ion-col width-20>
+            <strong>Order</strong>
+          </ion-col>
+          <ion-col width-20>
+            <strong>Destination</strong>
+          </ion-col>
+          <ion-col width-20>
+            <strong>Shipment By Date</strong>
+          </ion-col>
+          <ion-col width-20>
+            <strong>Field Eng.</strong>
+          </ion-col>
+          <ion-col width-20>
+            <strong>Shipment For</strong>
+          </ion-col>
+        </ion-row>
+  
+        <div *ngFor="let order of orders; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}" >
+         <div class="title_table_inside">
+          <ion-row>
+            <ion-col width-20 class="textcolor first_txt" (click)="toggleGroup(i)">
+              <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'"></ion-icon>{{order.orderNumber}}</ion-col>
+            <ion-col width-20>
+              <ion-icon name="pin"></ion-icon>{{order.destination}}
+            </ion-col>
+            <ion-col width-20>{{order.shippingmentDate}}</ion-col>
+            <ion-col width-20>{{order.fieldEng}}</ion-col>
+            <ion-col width-20 class="last_txt">{{order.shipmentFor}}</ion-col>
+          </ion-row>
+        </div>
+          <ion-row *ngIf="isGroupShown(i)" class="kid_table">
+            <ion-col width-20>
+              <strong>Tool Number</strong>
+            </ion-col>
+            <ion-col width-20>
+              <strong>qty.</strong>
+            </ion-col>
+            <ion-col width-20>
+              <strong>availabilty</strong>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="isGroupShown(i)" class="kid_child">
+            <ion-col width-20>{{order.toolsDetails.toolNumber}}</ion-col>
+            <ion-col width-20>{{order.toolsDetails.quant}}</ion-col>
+            <ion-col width-20>{{order.toolsDetails.availabilty}}</ion-col>
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-card>
+  
+  </ion-content>

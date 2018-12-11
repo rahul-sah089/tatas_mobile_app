@@ -1,0 +1,89 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-item>
+      <ion-label><strong>Pickup Point</strong></ion-label>
+      <ion-select [(ngModel)]="pickupPoint" (ngModelChange)="pickPointChange(pickupPoint)">
+        <ion-option value="1">Customer</ion-option>
+        <ion-option value="2">Warehouse</ion-option>
+        <ion-option value="3">Others</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <div *ngIf="pickupPoint == '1'">
+      <strong>System ID </strong>
+      <ion-input type="text" [value]="systemId" [(ngModel)]="systemId" (input)="getCustDet()"></ion-input>
+      <strong>Site Id</strong>
+      <ion-input type="text" [value]="siteId" [(ngModel)]="siteId"></ion-input>
+    </div>
+
+    <div *ngIf="pickupPoint == '2'">
+      <strong>Warehouse</strong>
+      <ion-input type="text" [value]="warehouseId" [(ngModel)]="warehouseId" (change)="getWhDet()"></ion-input>
+    </div>
+
+    <div *ngIf="pickupPoint == '1'">
+      <strong>Address</strong>
+      <p>{{address1}}</p>
+      <p>{{address2}}</p>
+      <p>{{city}}</p>
+      <p>{{state}}</p>
+      <p>{{pincode}}</p>
+    </div>
+
+    <div *ngIf="pickupPoint == '3' || pickupPoint == '2'">
+      <strong>Address Line 1</strong>
+      <ion-input type="text" [value]="address1" [(ngModel)]="address1"></ion-input>
+
+      <strong>Address Line 2</strong>
+      <ion-input type="text" [value]="address2" [(ngModel)]="address2"></ion-input>
+
+      <strong>City</strong>
+      <ion-input type="text" [value]="city" [(ngModel)]="city"></ion-input>
+
+      <strong>State</strong>
+      <ion-input type="text" [value]="state" [(ngModel)]="state"></ion-input>
+
+      <strong>Pincode</strong>
+      <ion-input type="text" [value]="pincode" [(ngModel)]="pincode"></ion-input>
+    </div>
+
+    <div>
+      <ion-item>
+        <ion-label><strong>Return Type</strong></ion-label>
+        <ion-select [(ngModel)]="returnType">
+          <ion-option value="1">Warehouse</ion-option>
+          <ion-option value="2">Calibration</ion-option>
+          <ion-option value="3">FE to FE By Hand</ion-option>
+          <ion-option value="4">FE to FE By Courier</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div *ngIf="returnType == 1 || returnType == 2">
+      <ion-item>
+        <ion-label><strong>Select Warehouse</strong></ion-label>
+        <ion-select [(ngModel)]="warehouseId">
+          <ion-option *ngFor="let warehouse of warehousesInfo" [value]="warehouse.wh_id">{{warehouse.wh_code}} - {{warehouse.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <div *ngIf="returnType == 3 || returnType == 4">
+      <strong>Order Number </strong>
+      <ion-input type="text" [value]="orderNum" [(ngModel)]="orderNum" (input)="checkOrderNum()"></ion-input>
+      <p><font size="3" color="{{orderIdStatusColor}}">{{orderIdStatus}}</font></p>
+    </div>
+
+    <h6 id="err_msg">{{error_msg}}</h6>
+    <h6 id="suc_msg">{{success_msg}}</h6>
+
+    <button type="submit" ion-button (click)="onReturnTools()">
+       Submit
+    </button>
+
+  </ion-grid>
+</ion-content>

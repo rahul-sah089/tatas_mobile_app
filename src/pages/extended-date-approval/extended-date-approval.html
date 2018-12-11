@@ -1,0 +1,76 @@
+<ion-header>
+  <page-header></page-header>
+</ion-header>
+
+<ion-content class="background" padding>
+  <h1 class="page_header_dif">Extend Date Request</h1>
+  <ion-card *ngIf="!itemExist">
+    <p style="text-align:center;">No extend date approvals needed</p>
+  </ion-card>
+  <ion-card *ngIf="itemExist" class="bkgrnd_trnsprnt">
+    <ion-grid>
+      <ion-row class="title_table row">
+        <ion-col col-3>
+          <strong>Order Numbers</strong>
+        </ion-col>
+        <ion-col col-3>
+          <strong>FE Name</strong>
+        </ion-col>
+        <ion-col col-3>
+          <strong>Return Date</strong>
+        </ion-col>
+        <ion-col col-3 class="last_child_no">
+          <strong>Requested Extend Date</strong>
+        </ion-col>
+      </ion-row>
+
+      <div *ngFor="let order of orders; let i=index" text-wrap [ngClass]="{active: isGroupShown(i)}">
+        <ion-row>
+          <ion-col col-3 class="first_txt" (click)="toggleGroup(i)">
+            <ion-icon color="success" item-right [name]="isGroupShown(i) ? 'arrow-dropdown' : 'arrow-dropright'" class="textcolor">
+            </ion-icon>
+            <span class="textcolor"> {{order.order_info.order_number}}</span>
+          </ion-col>
+          <ion-col col-3>
+            {{order.order_info.sso_id}}
+          </ion-col>
+          <ion-col col-3>
+            {{order.old_return_date}}
+          </ion-col>
+          <ion-col col-3 class="last_txt">
+            {{order.new_return_date}}
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="isGroupShown(i)" class="kid_table kid_title_table row ">
+          <ion-col col-4>
+            <strong>Tool No.</strong>
+          </ion-col>
+          <ion-col col-4>
+            <strong>Tool Des.</strong>
+          </ion-col>
+          <ion-col col-4 class="no_border_right">
+            <strong>Asset No.</strong>
+          </ion-col>
+
+        </ion-row>
+        <div *ngIf="isGroupShown(i)">
+          <ion-row *ngFor="let tool of order['tools']" class="kid_child">
+            <ion-col col-4 class="first_txt">{{tool.part_number}}</ion-col>
+            <ion-col col-4>{{tool.part_description}}</ion-col>
+            <ion-col col-4 class="last_txt">{{tool.asset_number}}</ion-col>
+          </ion-row>
+        </div>
+        <button class="button_hear" ion-button round icon-start (click)="extendDate(order, 1)" >
+          Approve
+        </button>
+        <button class="button_hear" ion-button round icon-end color="danger" (click)="extendDate(order, 2)" style="float: right;">
+          Decline
+        </button>
+
+
+
+      </div>
+
+    </ion-grid>
+  </ion-card>
+</ion-content>
